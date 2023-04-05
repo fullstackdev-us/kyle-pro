@@ -11,10 +11,20 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script lang="ts">
 import {RouterView} from 'vue-router'
 import Navbar from './components/nav-bar.vue'
 import PrimaryLayout from './components/primary-layout.vue'
+
+export default {
+  name: 'App',
+  components: {
+    RouterView,
+    Navbar,
+    PrimaryLayout
+  }
+}
+
 </script>
 
 <style scoped>

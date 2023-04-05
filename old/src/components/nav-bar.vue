@@ -5,7 +5,12 @@
   </div>
 </template>
 
-<!-- Scaffolded with GPT-4 -->
+<script lang="ts">
+// Scaffolded with GPT-4
+export default {
+   name: 'Navbar',
+}
+</script>
 
 <style>
 .navbar {

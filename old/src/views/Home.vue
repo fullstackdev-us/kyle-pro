@@ -14,32 +14,39 @@
     </form>
 </template>
  
-<script setup lang="ts">
-  // Scaffolded with GPT-4
-  import { ref } from 'vue';
+<script lang="ts">
+// Scaffolded with GPT-4
+import { ref, onMounted } from 'vue';
 
-  const emit = defineEmits(['resumeRequested']);
+export default {
+  name: 'BusinessCard',
+  setup(props,context) {
+    const showRequestForm = ref(false);
+    const requestEmailAddress = ref('');
+    const firstName = 'Kyle';
+    const lastName = 'Dunbar';
+    const githubUrl = 'https://github.com/fullstackdev-us';
+    const linkedinUrl = 'https://www.linkedin.com/in/dunbark';
 
-  const showRequestForm = ref(false);
-  const requestEmailAddress = ref('');
-  const firstName = 'Kyle';
-  const lastName = 'Dunbar';
-  const githubUrl = 'https://github.com/fullstackdev-us';
-  const linkedinUrl = 'https://www.linkedin.com/in/dunbark';
+    const requestResume = () => {
+      context.emit('resumeRequested', requestEmailAddress.value);
+    }
 
-  const requestResume = () => {
-    emit('resumeRequested', requestEmailAddress.value);
+    onMounted(() => {
+      console.log('component mounted');
+    });
+
+    return {
+      showRequestForm,
+      requestEmailAddress,
+      firstName,
+      lastName,
+      githubUrl,
+      linkedinUrl,
+      requestResume
+    };
   }
-
-  defineExpose({
-    showRequestForm,
-    requestEmailAddress,
-    firstName,
-    lastName,
-    githubUrl,
-    linkedinUrl,
-    requestResume
-  });
+};
 </script>
 
 <style scoped>

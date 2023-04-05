@@ -1,5 +1,3 @@
-// Scaffolded with GPT-4
-
 import Home from '../views/Home.vue'
 import About from '../views/About.vue'
 import { createRouter, createWebHashHistory } from 'vue-router'
