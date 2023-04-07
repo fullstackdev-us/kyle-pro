@@ -5,7 +5,8 @@
         <Navbar />
       </template>
       <template #body>
-        <router-view />
+        <router-view>
+        </router-view>  
       </template>
     </PrimaryLayout>
   </div>

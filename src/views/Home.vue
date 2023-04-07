@@ -1,29 +1,29 @@
 <template>
   <div class="home">
     <div class="business-card">
-    <div class="business-card-left">
-      <div class="name-circle">
-        K
+      <div class="business-card-left">
+        <div class="name-circle">
+          K
+        </div>
+      </div>
+      <div class="business-card-right">
+        <div class="text-2xl">{{ firstName }} {{ lastName }}</div>
+        <ul>
+          <li>{{ title }}</li>
+          <li>Experience: {{ experience }}</li>
+        </ul>
+        <div class="business-card-right-socials">
+          <a :href="githubUrl" target="_blank" rel="noopener noreferrer"><ph-github-logo :size="32" /></a>
+          <a :href="linkedinUrl" target="_blank" rel="noopener noreferrer"><ph-linkedin-logo :size="32" /></a>
+        </div>
       </div>
     </div>
-    <div class="business-card-right">
-      <div class="text-2xl">{{ firstName }} {{ lastName }}</div>
-      <ul>
-        <li>{{ title }}</li>
-        <li>Experience: {{ experience }}</li>
-      </ul>
-      <div class="business-card-right-socials">
-        <a :href="githubUrl" target="_blank" rel="noopener noreferrer"><ph-github-logo :size="32" /></a>
-        <a :href="linkedinUrl" target="_blank" rel="noopener noreferrer"><ph-linkedin-logo :size="32" /></a>
-      </div>
-    </div>
-  </div>
-  <button class="btn btn-primary" @click="showRequestForm = !showRequestForm">Request Resume</button>
-    <form v-if="showRequestForm" @submit.prevent="requestResume">
+    <button class="btn btn-primary" @click="showRequestForm = !showRequestForm">Request Resume</button>
+    <!-- <form v-if="showRequestForm" @submit.prevent="requestResume">
       <label>Your Email Address:</label>
       <input type="email" v-model="requestEmailAddress">
       <button type="submit" :disabled="!requestEmailAddress">Submit</button>
-    </form>
+    </form> -->
   </div>
 </template>
  
@@ -65,7 +65,7 @@
     background-color: lightgrey;
     color: black;
     transition: background-color 0.3s ease;
-    width: 32vw;
+    min-width: 32vw;
 
     &-left {
         display: flex;
