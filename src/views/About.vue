@@ -2,8 +2,8 @@
   <div class="about">
     <div class="about-top">
       <div class="avatar justify-center">
-        <div class="w-34 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-          <img src="https://placekitten.com/200/200" alt="Kyle Dunbar" />
+        <div class="max-w-[15rem] rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+          <img :src="avatarUrl" alt="Kyle Dunbar" />
         </div>
       </div>
       <h1 class="text-4xl font-bold mt-3 mb-2 text-center">Kyle Dunbar</h1>
@@ -17,6 +17,8 @@
 
 <script setup lang="ts">
   import { RequestResumeForm } from '../components';
+  import avatarUrl from '../assets/kyle.jpg';
+
   const summary = 'Kyle is a professional full stack developer with expertise in front-end and back-end development. He has designed, \
   coded and tested many Web and back-end applications. Kyle\'s specialty is his ability to quickly adjust to the changing \
   needs of the ever-evolving software industry and develop innovative solutions to complex problems. His passion for software engineering led him \

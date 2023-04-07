@@ -2,8 +2,10 @@
   <div class="home">
     <div class="business-card">
       <div class="business-card-left">
-        <div class="name-circle">
-          K
+        <div class="avatar">
+          <div class="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+            <img :src="avatarUrl" alt="Kyle Dunbar Image" />
+          </div>
         </div>
       </div>
       <div class="business-card-right">
@@ -27,6 +29,7 @@
   import { useExperienceCounter } from '../composables';
   import { PhGithubLogo, PhLinkedinLogo } from '@phosphor-icons/vue';
   import { RequestResumeForm } from '../components';
+  import avatarUrl from '../assets/kyle.jpg';
 
   const requestEmailAddress = ref('');
   const firstName = 'Kyle';
@@ -77,19 +80,5 @@
       background-color: #222;
       color: #FFFFFF;
   }
-}
-
-.name-circle {
-    width: 5rem;
-    height: 5rem;
-    border-radius: 50%;
-    background-color: #000;
-    color: #FFFFFF;
-    font-size: 2rem;
-    font-weight: bold;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto;
 }
 </style>
