@@ -10,7 +10,7 @@
         <div class="text-2xl">{{ firstName }} {{ lastName }}</div>
         <ul>
           <li>{{ title }}</li>
-          <li>Experience: {{ experience }}</li>
+          <li><Transition name="slide-fade"><div v-show="experience != ''">Experience: {{ experience }}</div></Transition></li>
         </ul>
         <div class="business-card-right-socials">
           <a :href="githubUrl" target="_blank" rel="noopener noreferrer"><ph-github-logo :size="32" /></a>
@@ -28,7 +28,6 @@
   import { PhGithubLogo, PhLinkedinLogo } from '@phosphor-icons/vue';
   import { RequestResumeForm } from '../components';
 
-  const emit = defineEmits(['resumeRequested']);
   const requestEmailAddress = ref('');
   const firstName = 'Kyle';
   const lastName = 'Dunbar';
