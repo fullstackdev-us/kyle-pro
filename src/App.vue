@@ -1,33 +1,51 @@
 <template>
-  <div id="app">
-    <PrimaryLayout>
-      <template #nav>
-        <nav-bar />
-      </template>
-      <template #body>
-        <router-view>
-        </router-view>  
-      </template>
-    </PrimaryLayout>
+  <div id="app" class="app">
+    <div class="app-nav">
+      <nav-bar />
+    </div>
+    <swiper-container :loop="loop">
+      <swiper-slide v-for=" view in views">
+        <div class="app-body">
+          <div>
+            <component :is="view" />
+          </div>
+          
+        </div>
+      </swiper-slide>
+    </swiper-container>
   </div>
 </template>
 
 <script setup lang="ts">
-import {RouterView} from 'vue-router'
-import { NavBar, PrimaryLayout } from './components';
+// import {RouterView} from 'vue-router'
+import { NavBar } from './components';
+// import { SwiperContainer, SwiperSlide } from 'swiper'
+import Home from './views/Home.vue';
+import About from './views/About.vue';
+
+const views = [Home, About];
+const loop = true;
+
 </script>
 
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+<style lang="scss" scoped>
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content:center;
+  align-items:center;
+
+  &-nav {
+    padding: 2rem;
+  }
+
+  &-body {
+    width: 100%;
+    justify-content:center;align-items:center;
+    // justify-content: center;
+    // align-self: center;
+    // align-items: center;
+  }
 }
 </style>

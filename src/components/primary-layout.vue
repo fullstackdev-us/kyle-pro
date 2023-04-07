@@ -31,6 +31,5 @@
   flex-grow: 1;
   overflow-y: auto;
   padding: 2rem;
-  
 }
 </style>

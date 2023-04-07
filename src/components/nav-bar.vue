@@ -1,5 +1,5 @@
 <template>
-  <div class="navbar">
+  <div class="nav-bar">
     <router-link to="/">Home</router-link>
     <router-link to="/about">About</router-link>
   </div>
@@ -8,7 +8,7 @@
 <script setup lang="ts"></script>
 
 <style>
-.navbar {
+.nav-bar {
   width: 100%;
   text-align: center;
   display: grid;
@@ -16,24 +16,24 @@
   column-gap: 1rem;
 } 
 
-.navbar a {
+.nav-bar a {
   color: #fff;
   /* padding: 0.5rem 1rem; */
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
-.navbar a:hover {
+.nav-bar a:hover {
   color: #444;
 }
 
 @media (prefers-color-scheme: dark) {
-  .navbar a {
+  .nav-bar a {
     color: rgb(203, 203, 203);
   }
 }
 @media (prefers-color-scheme: light) {
-  .navbar a {
+  .nav-bar a {
     color: #000;
   }
 }

@@ -21,7 +21,6 @@ export default function useExperienceCounter(options?: UseExperienceCounterOptio
     if (options) {
       for (var key in options) {
         if (count.hasOwnProperty(key)) {
-          console.log(key);
           value += `${count[key as keyof Counts]} ${key}, `;
         }
       }
