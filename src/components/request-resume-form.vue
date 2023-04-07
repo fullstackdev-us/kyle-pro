@@ -9,6 +9,8 @@
   </div>
 </template>
 
+<script setup lang="ts"></script>
+
 <style lang="scss">
 .resume-form {
   display: grid;
