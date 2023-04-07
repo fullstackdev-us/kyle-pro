@@ -15,7 +15,7 @@
 
 .navbar a {
   color: #fff;
-  padding: 0.5rem 1rem;
+  /* padding: 0.5rem 1rem; */
   text-decoration: none;
   transition: color 0.2s ease;
 }

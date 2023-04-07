@@ -1,8 +1,9 @@
 import { onMounted, onUnmounted, ref, watch } from "vue";
+import { Counts, UseExperienceCounterOptions } from "./types";
 
-export default function useExperienceCounter() {
+export default function useExperienceCounter(options?: UseExperienceCounterOptions) {
   const tick = ref(0);
-  const experience = ref({});
+  const experience = ref('');
 
   onMounted(() => {
     setInterval(() => {
@@ -14,7 +15,28 @@ export default function useExperienceCounter() {
     clearInterval(tick.value);
   });
 
-  watch(tick, (newValue, oldValue) => {
+  const format = (count: Counts) => {
+    let value = '';
+
+    if (options) {
+      for (var key in options) {
+        if (count.hasOwnProperty(key)) {
+          console.log(key);
+          value += `${count[key as keyof Counts]} ${key}, `;
+        }
+      }
+    } else {
+      value = `${count.years} years, ${count.months} months, ${count.days} days, ${count.hours} hours, ${count.minutes} minutes, ${count.seconds} seconds`;
+    }
+
+    if (value.endsWith(', ')) {
+      value = value.substring(0, value.length - 2);
+    }
+
+    return value;
+  };
+
+  watch(tick, () => {
     const startDate = new Date(2018, 9, 1);
 
     const diffMs = (new Date()).valueOf() - startDate.valueOf();
@@ -35,7 +57,7 @@ export default function useExperienceCounter() {
 
     const seconds = Math.floor(remainingMs5 / 1000);
 
-    experience.value = `${years} years, ${months} months, ${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`;
+    experience.value = format({ years, months, days, hours, minutes, seconds });
   });
 
   return experience;
