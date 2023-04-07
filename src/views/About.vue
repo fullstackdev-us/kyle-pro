@@ -34,11 +34,10 @@
     color: black;
     transition: background-color 0.3s ease;
     min-width: 32vw;
+    max-width: 32vw;
     padding: 1rem;
 
     &-summary {
-      min-width: 350px;
-      max-width: 500px;
       text-indent: 3rem;
     }
   }
