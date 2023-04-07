@@ -4,7 +4,7 @@
     <div class="grid gap-3" v-else>
       <input  v-model="email" type="text" placeholder="Email Address" class="input input-bordered w-full" />
       <div class="grid grid-cols-2 gap-2">
-        <button @click="requestResume" class="btn btn-primary">Submit</button>
+        <button @click="submitEmail" class="btn btn-primary">Submit</button>
         <button @click="cancelRequestResume" class="btn btn-primary">Cancel</button>
       </div>
     </div>
