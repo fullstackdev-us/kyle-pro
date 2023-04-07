@@ -2,7 +2,7 @@
   <div id="app">
     <PrimaryLayout>
       <template #nav>
-        <Navbar />
+        <nav-bar />
       </template>
       <template #body>
         <router-view>
@@ -14,8 +14,7 @@
 
 <script setup lang="ts">
 import {RouterView} from 'vue-router'
-import Navbar from './components/nav-bar.vue'
-import PrimaryLayout from './components/primary-layout.vue'
+import { NavBar, PrimaryLayout } from './components';
 </script>
 
 <style scoped>

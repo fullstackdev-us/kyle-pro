@@ -18,34 +18,23 @@
         </div>
       </div>
     </div>
-    <button class="btn btn-primary" @click="showRequestForm = !showRequestForm">Request Resume</button>
-    <!-- <form v-if="showRequestForm" @submit.prevent="requestResume">
-      <label>Your Email Address:</label>
-      <input type="email" v-model="requestEmailAddress">
-      <button type="submit" :disabled="!requestEmailAddress">Submit</button>
-    </form> -->
+    <RequestResumeForm />
   </div>
 </template>
  
 <script setup lang="ts">
-  // Scaffolded with GPT-4
   import { ref } from 'vue';
   import { useExperienceCounter } from '../composables';
   import { PhGithubLogo, PhLinkedinLogo } from '@phosphor-icons/vue';
+  import { RequestResumeForm } from '../components';
 
   const emit = defineEmits(['resumeRequested']);
-
-  const showRequestForm = ref(false);
   const requestEmailAddress = ref('');
   const firstName = 'Kyle';
   const lastName = 'Dunbar';
   const title = 'Full Stack Developer';
   const githubUrl = 'https://github.com/fullstackdev-us';
   const linkedinUrl = 'https://www.linkedin.com/in/dunbark';
-
-  const requestResume = () => {
-    emit('resumeRequested', requestEmailAddress.value);
-  }
 
   const experience = useExperienceCounter({ years: true, months: true});
 </script>

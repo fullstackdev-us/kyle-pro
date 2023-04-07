@@ -15,7 +15,7 @@
 </template>
  
 <script lang="ts">
-// Scaffolded with GPT-4
+
 import { ref, onMounted } from 'vue';
 
 export default {

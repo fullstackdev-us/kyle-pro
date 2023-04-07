@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts">
-// Scaffolded with GPT-4
+
 import { computed, onMounted, onUnmounted, ref } from 'vue';
 
 export default {

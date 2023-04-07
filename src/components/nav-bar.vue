@@ -5,7 +5,7 @@
   </div>
 </template>
 
-<!-- Scaffolded with GPT-4 -->
+
 
 <style>
 .navbar {

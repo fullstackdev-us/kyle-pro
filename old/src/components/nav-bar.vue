@@ -6,7 +6,7 @@
 </template>
 
 <script lang="ts">
-// Scaffolded with GPT-4
+
 export default {
    name: 'Navbar',
 }
