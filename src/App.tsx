@@ -1,25 +1,31 @@
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Toaster as Sonner } from "@/components/ui/sonner";
+import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import Index from "./pages/Index.tsx";
-import NotFound from "./pages/NotFound.tsx";
-
-const queryClient = new QueryClient();
+import { ThemeToggle } from "@/components/ThemeToggle";
+import { HeroSection } from "@/components/HeroSection";
+import { SkillsSection } from "@/components/SkillsSection";
+import { ExperienceSection } from "@/components/ExperienceSection";
+import { EducationSection } from "@/components/EducationSection";
+import { ContactSection } from "@/components/ContactSection";
 
 const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
+  <TooltipProvider>
+    <Toaster />
+    <div className="min-h-screen bg-background text-foreground">
+      <header className="fixed top-0 right-0 p-4 z-50">
+        <ThemeToggle />
+      </header>
+      <main className="max-w-3xl mx-auto px-6 pb-20">
+        <HeroSection />
+        <SkillsSection />
+        <ExperienceSection />
+        <EducationSection />
+        <ContactSection />
+      </main>
+      <footer className="border-t border-border py-8 text-center text-xs text-muted-foreground">
+        © {new Date().getFullYear()} Kyle V. Dunbar
+      </footer>
+    </div>
+  </TooltipProvider>
 );
 
 export default App;
