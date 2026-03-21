@@ -41,8 +41,7 @@ kyle-pro/
 │   │   ├── ExperienceSection.tsx
 │   │   ├── EducationSection.tsx
 │   │   ├── ContactSection.tsx
-│   │   ├── ThemeToggle.tsx
-│   │   └── NavLink.tsx
+│   │   └── ThemeToggle.tsx
 │   ├── hooks/                 # Custom hooks (use-mobile.tsx if used, else removed)
 │   ├── lib/utils.ts           # shadcn/ui utility (cn function)
 │   ├── App.tsx                # Renders Index directly, no router
@@ -140,7 +139,7 @@ Note: `src/pages/` directory is removed. `Index.tsx` content is inlined into `Ap
 
 Keep only components that are actually imported by page sections. Remove the rest. Expected keepers (to verify during implementation by tracing imports):
 
-- `button.tsx`, `input.tsx`, `textarea.tsx`, `tooltip.tsx`, `sonner.tsx`, `separator.tsx`, `label.tsx`
+- `button.tsx`, `input.tsx`, `textarea.tsx`, `tooltip.tsx`, `sonner.tsx`
 
 Expected removals (~30+ components):
 
@@ -175,7 +174,7 @@ Expected removals (~30+ components):
 - `lucide-react`
 - `sonner`
 - `tailwind-merge`, `clsx`, `class-variance-authority`, `tailwindcss-animate`
-- Radix packages for kept components (`@radix-ui/react-tooltip`, `@radix-ui/react-label`, `@radix-ui/react-slot`, `@radix-ui/react-separator`)
+- Radix packages for kept components (`@radix-ui/react-tooltip`, `@radix-ui/react-slot`)
 - All existing devDependencies except those listed for removal
 
 ### Fix ThemeToggle
