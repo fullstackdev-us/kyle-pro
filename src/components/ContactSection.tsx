@@ -1,27 +1,90 @@
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 
+declare global {
+  interface Window {
+    turnstile?: {
+      render: (
+        container: string | HTMLElement,
+        options: { sitekey: string; callback: (token: string) => void; "expired-callback": () => void }
+      ) => string;
+      reset: (widgetId: string) => void;
+    };
+  }
+}
+
+const TURNSTILE_SITE_KEY = import.meta.env.VITE_TURNSTILE_SITE_KEY || "";
+
 export const ContactSection = () => {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [sending, setSending] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const turnstileRef = useRef<HTMLDivElement>(null);
+  const widgetIdRef = useRef<string>("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  useEffect(() => {
+    const renderWidget = () => {
+      if (!turnstileRef.current || !window.turnstile) return;
+      widgetIdRef.current = window.turnstile.render(turnstileRef.current, {
+        sitekey: TURNSTILE_SITE_KEY,
+        callback: (token: string) => setTurnstileToken(token),
+        "expired-callback": () => setTurnstileToken(""),
+      });
+    };
+
+    // Turnstile script loads async — poll until available
+    if (window.turnstile) {
+      renderWidget();
+    } else {
+      const interval = setInterval(() => {
+        if (window.turnstile) {
+          clearInterval(interval);
+          renderWidget();
+        }
+      }, 100);
+      return () => clearInterval(interval);
+    }
+  }, []);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!form.name.trim() || !form.email.trim() || !form.message.trim()) {
       toast.error("Please fill in all fields.");
       return;
     }
+    if (!turnstileToken) {
+      toast.error("Please complete the verification.");
+      return;
+    }
+
     setSending(true);
-    // Simulate send
-    setTimeout(() => {
-      setSending(false);
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...form, turnstileToken }),
+      });
+
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.error || "Failed to send message");
+      }
+
       toast.success("Message sent! I'll get back to you soon.");
       setForm({ name: "", email: "", message: "" });
-    }, 1000);
+      setTurnstileToken("");
+      if (window.turnstile && widgetIdRef.current) {
+        window.turnstile.reset(widgetIdRef.current);
+      }
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "Failed to send message. Please try again.");
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -61,7 +124,8 @@ export const ContactSection = () => {
           maxLength={1000}
           rows={5}
         />
-        <Button type="submit" disabled={sending}>
+        <div ref={turnstileRef} />
+        <Button type="submit" disabled={sending || !turnstileToken}>
           {sending ? "Sending…" : "Send Message"}
         </Button>
       </motion.form>
