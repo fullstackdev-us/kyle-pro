@@ -79,7 +79,7 @@ async function handleContact(request: Request, env: Env): Promise<Response> {
     if (!resendResponse.ok) {
       const error = await resendResponse.text();
       console.error("Resend error:", error);
-      return json({ error: "Failed to send message" }, 500);
+      return json({ error: `Resend: ${error}` }, 500);
     }
   } catch (err) {
     console.error("Send error:", err);
