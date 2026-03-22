@@ -69,7 +69,7 @@ async function handleContact(request: Request, env: Env): Promise<Response> {
       },
       body: JSON.stringify({
         from: `kyle.pro Contact Form <contact@kyle.pro>`,
-        to: [env.CONTACT_EMAIL],
+        to: env.CONTACT_EMAIL,
         reply_to: email,
         subject: `Contact form: ${name.trim()}`,
         text: `Name: ${name.trim()}\nEmail: ${email.trim()}\n\nMessage:\n${message.trim()}`,
@@ -79,7 +79,7 @@ async function handleContact(request: Request, env: Env): Promise<Response> {
     if (!resendResponse.ok) {
       const error = await resendResponse.text();
       console.error("Resend error:", error);
-      return json({ error: `Resend error: ${error}` }, 500);
+      return json({ error: "Failed to send message" }, 500);
     }
   } catch (err) {
     console.error("Send error:", err);
