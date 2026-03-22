@@ -27,6 +27,8 @@ export const ContactSection = () => {
   const widgetIdRef = useRef<string>("");
 
   useEffect(() => {
+    if (!TURNSTILE_SITE_KEY) return;
+
     const renderWidget = () => {
       if (!turnstileRef.current || !window.turnstile) return;
       widgetIdRef.current = window.turnstile.render(turnstileRef.current, {
@@ -56,7 +58,7 @@ export const ContactSection = () => {
       toast.error("Please fill in all fields.");
       return;
     }
-    if (!turnstileToken) {
+    if (TURNSTILE_SITE_KEY && !turnstileToken) {
       toast.error("Please complete the verification.");
       return;
     }
@@ -124,8 +126,8 @@ export const ContactSection = () => {
           maxLength={1000}
           rows={5}
         />
-        <div ref={turnstileRef} />
-        <Button type="submit" disabled={sending || !turnstileToken}>
+        {TURNSTILE_SITE_KEY && <div ref={turnstileRef} />}
+        <Button type="submit" disabled={sending || (!!TURNSTILE_SITE_KEY && !turnstileToken)}>
           {sending ? "Sending…" : "Send Message"}
         </Button>
       </motion.form>
