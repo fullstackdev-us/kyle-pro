@@ -22,7 +22,7 @@ const App = () => (
         <ContactSection />
       </main>
       <footer className="border-t border-border py-8 text-center text-xs text-muted-foreground">
-        © {new Date().getFullYear()} Kyle V. Dunbar
+        © {new Date().getFullYear()} Kyle Dunbar
       </footer>
     </div>
   </TooltipProvider>

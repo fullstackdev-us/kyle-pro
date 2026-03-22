@@ -9,7 +9,7 @@ export const HeroSection = () => (
       transition={{ duration: 0.6 }}
     >
       <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-4">
-        Kyle V. Dunbar
+        Kyle Dunbar
       </h1>
       <p className="text-lg md:text-xl text-muted-foreground max-w-xl mb-2">
         Full Stack Software Engineer
