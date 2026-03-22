@@ -36,26 +36,28 @@ async function handleContact(request: Request, env: Env): Promise<Response> {
     return json({ error: "Invalid email address" }, 400);
   }
 
-  if (!turnstileToken) {
-    return json({ error: "Turnstile verification required" }, 400);
-  }
-
-  const turnstileResponse = await fetch(
-    "https://challenges.cloudflare.com/turnstile/v0/siteverify",
-    {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams({
-        secret: env.TURNSTILE_SECRET_KEY,
-        response: turnstileToken,
-        remoteip: request.headers.get("CF-Connecting-IP") || "",
-      }),
+  if (env.TURNSTILE_SECRET_KEY) {
+    if (!turnstileToken) {
+      return json({ error: "Turnstile verification required" }, 400);
     }
-  );
 
-  const turnstileResult = await turnstileResponse.json<{ success: boolean }>();
-  if (!turnstileResult.success) {
-    return json({ error: "Turnstile verification failed" }, 400);
+    const turnstileResponse = await fetch(
+      "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({
+          secret: env.TURNSTILE_SECRET_KEY,
+          response: turnstileToken,
+          remoteip: request.headers.get("CF-Connecting-IP") || "",
+        }),
+      }
+    );
+
+    const turnstileResult = await turnstileResponse.json<{ success: boolean }>();
+    if (!turnstileResult.success) {
+      return json({ error: "Turnstile verification failed" }, 400);
+    }
   }
 
   try {
